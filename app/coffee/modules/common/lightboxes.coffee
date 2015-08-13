@@ -24,6 +24,7 @@ module = angular.module("taigaCommon")
 bindOnce = @.taiga.bindOnce
 timeout = @.taiga.timeout
 debounce = @.taiga.debounce
+sizeFormat = @.taiga.sizeFormat
 
 #############################################################################
 ## Common Lightbox Services
@@ -263,13 +264,30 @@ module.directive("tgBlockingMessageInput", ["$log", "$tgTemplate", "$compile", B
 ## Create/Edit Userstory Lightbox Directive
 #############################################################################
 
-CreateEditUserstoryDirective = ($repo, $model, $rs, $rootScope, lightboxService, $loading, $translate) ->
+CreateEditUserstoryDirective = ($repo, $model, $rs, $rootScope, lightboxService, $loading, $translate, $confirm, $q, attachmentsService) ->
     link = ($scope, $el, attrs) ->
+        $scope.createEditUs = {}
         $scope.isNew = true
 
+        resetScope = () ->
+            $scope.createEditUs = {
+                attachments: []
+            }
+
+        # $scope.addAttachment = (attachment) ->
+        #     $scope.createEditUs.attachments.push(attachment)
+
+        # eliminar on-add
+        $scope.$watch "attachments", (attachments) ->
+            if attachments
+                console.log attachments.toJS()
+
         $scope.$on "usform:new", (ctx, projectId, status, statusList) ->
+            resetScope()
+
             $scope.isNew = true
             $scope.usStatusList = statusList
+            $scope.attachments = Immutable.List()
 
             $scope.us = $model.make_model("userstories", {
                 project: projectId
@@ -291,8 +309,13 @@ CreateEditUserstoryDirective = ($repo, $model, $rs, $rootScope, lightboxService,
 
             lightboxService.open($el)
 
-        $scope.$on "usform:edit", (ctx, us) ->
+        $scope.$on "usform:edit", (ctx, us, attachments) ->
+            resetScope()
+
+            attachments = _.map attachments, (attachment) -> attachment._attrs
+
             $scope.us = us
+            $scope.attachments = Immutable.fromJS(attachments)
             $scope.isNew = false
 
             # Update texts for edition
@@ -319,6 +342,12 @@ CreateEditUserstoryDirective = ($repo, $model, $rs, $rootScope, lightboxService,
 
             lightboxService.open($el)
 
+        createAttachments = (obj) ->
+            promises = _.map $scope.createEditUs.attachments, (file) ->
+                attachmentsService.uploadUSAttachment(file, obj)
+
+            return $q.all(promises)
+
         submit = debounce 2000, (event) =>
             event.preventDefault()
 
@@ -336,6 +365,11 @@ CreateEditUserstoryDirective = ($repo, $model, $rs, $rootScope, lightboxService,
             else
                 promise = $repo.save($scope.us)
                 broadcastEvent = "usform:edit:success"
+
+            promise.then (data) ->
+                createAttachments(data)
+
+                return data
 
             promise.then (data) ->
                 currentLoading.finish()
@@ -378,6 +412,9 @@ module.directive("tgLbCreateEditUserstory", [
     "lightboxService",
     "$tgLoading",
     "$translate",
+    "$tgConfirm",
+    "$q",
+    "tgAttachmentsService",
     CreateEditUserstoryDirective
 ])
 
