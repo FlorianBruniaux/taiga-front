@@ -5,12 +5,11 @@ class AttachmentsService
         "$tgConfirm",
         "$tgConfig",
         "$translate",
-        "tgProjectService",
         "$q",
         "$tgResources"
     ]
 
-    constructor: (@confirm, @config, @tranlsate, @projectService, @q, @rs) ->
+    constructor: (@confirm, @config, @tranlsate, @q, @rs) ->
         @.maxFileSize = @.getMaxFileSize()
 
         if @.maxFileSize
@@ -36,10 +35,11 @@ class AttachmentsService
     getMaxFileSize: () ->
         return @config.get("maxUploadFileSize", null)
 
-    upload: (attachment, obj, type) ->
-        projectId = @projectService.project.get('id')
+    delete: (attachment, type) ->
+        return @rs.attachments.delete("attachments/" + type, attachment)
 
-        promise = @rs.attachments.create("attachments/" + type, projectId, obj.id, attachment)
+    upload: (attachment, obj, type) ->
+        promise = @rs.attachments.create("attachments/" + type, obj.project, obj.id, attachment)
 
         promise = promise.then null, (data) =>
             if data.status == 413

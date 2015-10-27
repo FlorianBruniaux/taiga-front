@@ -10,7 +10,7 @@ section.attachmenst
             input(id="add-attach", type="file", multiple="multiple", ng-model="files" tg-file-change="vm.addAttachments(files)")
 
     .attachment-body
-        .single-attachment(tg-repeat="attachment in vm.attachments track by attachment.get('name')")
+        .single-attachment(tg-repeat="attachment in vm.attachments track by $index")
             .attachment-name
                 span.icon.icon-documents
                 span {{attachment.get('name')}}

@@ -4,7 +4,9 @@ AttachmentsDirective = () ->
     return {
         scope: {},
         bindToController: {
-            attachments: "="
+            attachments: "=",
+            onAdd: "&",
+            onDelete: "&"
         },
         controller: "Attachments",
         controllerAs: "vm",

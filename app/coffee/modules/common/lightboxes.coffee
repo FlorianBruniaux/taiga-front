@@ -269,25 +269,25 @@ CreateEditUserstoryDirective = ($repo, $model, $rs, $rootScope, lightboxService,
         $scope.createEditUs = {}
         $scope.isNew = true
 
-        resetScope = () ->
-            $scope.createEditUs = {
-                attachments: []
-            }
+        attachmentsToAdd = Immutable.List()
+        attachmentsToDelete = Immutable.List()
 
-        # $scope.addAttachment = (attachment) ->
-        #     $scope.createEditUs.attachments.push(attachment)
+        resetAttachments = () ->
+            attachmentsToAdd = Immutable.List()
+            attachmentsToDelete = Immutable.List()
 
-        # eliminar on-add
-        $scope.$watch "attachments", (attachments) ->
-            if attachments
-                console.log attachments.toJS()
+        $scope.addAttachment = (attachment) ->
+            attachmentsToAdd = attachmentsToAdd.push(attachment)
+
+        $scope.deleteAttachment = (attachment) ->
+            attachmentsToDelete = attachmentsToDelete.push(attachment)
 
         $scope.$on "usform:new", (ctx, projectId, status, statusList) ->
-            resetScope()
-
             $scope.isNew = true
             $scope.usStatusList = statusList
             $scope.attachments = Immutable.List()
+
+            resetAttachments()
 
             $scope.us = $model.make_model("userstories", {
                 project: projectId
@@ -310,13 +310,13 @@ CreateEditUserstoryDirective = ($repo, $model, $rs, $rootScope, lightboxService,
             lightboxService.open($el)
 
         $scope.$on "usform:edit", (ctx, us, attachments) ->
-            resetScope()
-
             attachments = _.map attachments, (attachment) -> attachment._attrs
 
             $scope.us = us
             $scope.attachments = Immutable.fromJS(attachments)
             $scope.isNew = false
+
+            resetAttachments()
 
             # Update texts for edition
             $el.find(".button-green").html($translate.instant("COMMON.SAVE"))
@@ -343,8 +343,14 @@ CreateEditUserstoryDirective = ($repo, $model, $rs, $rootScope, lightboxService,
             lightboxService.open($el)
 
         createAttachments = (obj) ->
-            promises = _.map $scope.createEditUs.attachments, (file) ->
-                attachmentsService.uploadUSAttachment(file, obj)
+            promises = _.map attachmentsToAdd.toJS(), (attachment) ->
+                attachmentsService.uploadUSAttachment(attachment.file, obj)
+
+            return $q.all(promises)
+
+        deleteAttachments = (obj) ->
+            promises = _.map attachmentsToDelete.toJS(), (attachment) ->
+                attachmentsService.delete(attachment, "us")
 
             return $q.all(promises)
 
@@ -368,6 +374,7 @@ CreateEditUserstoryDirective = ($repo, $model, $rs, $rootScope, lightboxService,
 
             promise.then (data) ->
                 createAttachments(data)
+                deleteAttachments(data)
 
                 return data
 
