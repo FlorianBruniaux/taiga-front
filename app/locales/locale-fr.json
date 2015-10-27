@@ -616,7 +616,7 @@
         "US_STATUS": {
             "ACTION_ADD_STATUS": "Ajouter un nouveau status",
             "IS_ARCHIVED_COLUMN": "Est archivé?",
-            "WIP_LIMIT_COLUMN": "Limite de Work In Progress",
+            "WIP_LIMIT_COLUMN": "Limite de 'Work In Progress'",
             "PLACEHOLDER_WRITE_NAME": "Donnez un nom au nouvel état"
         },
         "MENU": {
@@ -666,17 +666,17 @@
             "REPORT": "Signaler un abus",
             "TABS": {
                 "ACTIVITY_TAB": "Activité",
-                "ACTIVITY_TAB_TITLE": "Show all the activity of this user",
+                "ACTIVITY_TAB_TITLE": "Afficher toute l'activité de cet utilisateur",
                 "PROJECTS_TAB": "Projets",
-                "PROJECTS_TAB_TITLE": "List all projects that this user is a member",
+                "PROJECTS_TAB_TITLE": "Afficher tous les projets auquel appartient cet utilisateur",
                 "LIKES_TAB": "Likes",
-                "LIKES_TAB_TITLE": "List all likes made by this user",
+                "LIKES_TAB_TITLE": "Afficher tous les 'likes' de cet utilisateur",
                 "VOTES_TAB": "Votes",
-                "VOTES_TAB_TITLE": "List all votes made by this user",
-                "WATCHED_TAB": "Watched",
-                "WATCHED_TAB_TITLE": "List all item watched by this user",
+                "VOTES_TAB_TITLE": "Afficher tous les votes de cet utilisateur",
+                "WATCHED_TAB": "Suivis",
+                "WATCHED_TAB_TITLE": "Afficher tous les items suivis par cet utilisateur",
                 "CONTACTS_TAB": "Contacts",
-                "CONTACTS_TAB_TITLE": "List all contacts made by this user"
+                "CONTACTS_TAB_TITLE": "Afficher tous les contacts de cet utilisateur"
             }
         },
         "PROFILE_SIDEBAR": {
@@ -685,18 +685,18 @@
             "ADD_INFO": "Modifier votre biographie"
         },
         "PROFILE_FAVS": {
-            "FILTER_INPUT_PLACEHOLDER": "Type something...",
+            "FILTER_INPUT_PLACEHOLDER": "Tapper quelque chose...",
             "FILTER_TYPE_ALL": "Toutes",
-            "FILTER_TYPE_ALL_TITLE": "Show all",
+            "FILTER_TYPE_ALL_TITLE": "Tout afficher",
             "FILTER_TYPE_PROJECTS": "Projets",
-            "FILTER_TYPE_PROJECT_TITLES": "Show only projects",
+            "FILTER_TYPE_PROJECT_TITLES": "N'afficher que les projets",
             "FILTER_TYPE_USER_STORIES": "Stories",
-            "FILTER_TYPE_USER_STORIES_TITLES": "Show only user stories",
+            "FILTER_TYPE_USER_STORIES_TITLES": "N'afficher que les 'user stories'",
             "FILTER_TYPE_TASKS": "Tâches",
-            "FILTER_TYPE_TASK_TITLES": "Show only tasks",
+            "FILTER_TYPE_TASK_TITLES": "N'afficher que les tâches",
             "FILTER_TYPE_ISSUES": "Tickets",
-            "FILTER_TYPE_ISSUES_TITLE": "Show only issues",
-            "EMPTY_TITLE": "It looks like there's nothing to show here."
+            "FILTER_TYPE_ISSUES_TITLE": "N'afficher que les tickets",
+            "EMPTY_TITLE": "Visiblement il n y a rien à afficher ici ..."
         }
     },
     "PROJECT": {
@@ -755,7 +755,7 @@
         },
         "IMPORT": {
             "TITLE": "Importation du projet en cours",
-            "UPLOADING_FILE": "Téléversement du fichier de vidage",
+            "UPLOADING_FILE": "Téléchargement du fichier d'export",
             "DESCRIPTION": "Ce processus peut prendre du temps, veuillez garder cette fenêtre ouverte.",
             "ASYNC_IN_PROGRESS_TITLE": "Nos Oompa Loompas sont en train d'importer votre projet",
             "ASYNC_IN_PROGRESS_MESSAGE": "Ce processus pourrait durer plusieurs minutes <br/> Nous vous enverrons un courriel quand ce sera prêt",
@@ -770,21 +770,21 @@
             "LIKE": "Like",
             "LIKED": "Liked",
             "UNLIKE": "Unlike",
-            "BUTTON_TITLE": "Like or unlike this project",
+            "BUTTON_TITLE": "'Liker' ou 'Unliker' ce projet",
             "COUNTER_TITLE": "{total, plural, one{one fan} other{# fans}}"
         },
         "WATCH_BUTTON": {
-            "BUTTON_TITLE": "Watch this project and set notification policy",
-            "WATCH": "Watch",
-            "WATCHING": "Observant",
+            "BUTTON_TITLE": "Suivre ce projet et établir la politique de notification",
+            "WATCH": "Suivre",
+            "WATCHING": "Suivi",
             "COUNTER_TITLE": "{total, plural, one{one watcher} other{# watchers}}",
             "OPTIONS": {
-                "NOTIFY_ALL": "Receive all notifications",
-                "NOTIFY_ALL_TITLE": "Receive all notifications for this project",
-                "NOTIFY_INVOLVED": "Only involved",
-                "NOTIFY_INVOLVED_TITLE": "Recive notificacions only when you are involved",
-                "UNWATCH": "Unwatch",
-                "UNWATCH_TITLE": "Unwatch this project"
+                "NOTIFY_ALL": "Recevoir toutes les notifications",
+                "NOTIFY_ALL_TITLE": "Recevoir toutes les notifications pour ce projet",
+                "NOTIFY_INVOLVED": "Uniquement où j'apparais",
+                "NOTIFY_INVOLVED_TITLE": "Recevoir les notifications uniquement quand vous participez",
+                "UNWATCH": "Ne plus suivre",
+                "UNWATCH_TITLE": "Ne plus suivre ce projet"
             }
         }
     },
@@ -823,12 +823,12 @@
         },
         "ADD_EDIT_SPRINT": {
             "TITLE": "Nouveau sprint",
-            "PLACEHOLDER_SPRINT_NAME": "nom du sprint",
+            "PLACEHOLDER_SPRINT_NAME": "Nom du sprint",
             "PLACEHOLDER_SPRINT_START": "Début estimé",
             "PLACEHOLDER_SPRINT_END": "Fin estimée",
             "ACTION_DELETE_SPRINT": "Voulez-vous supprimer ce sprint ?",
             "TITLE_ACTION_DELETE_SPRINT": "supprimer un sprint",
-            "LAST_SPRINT_NAME": "le dernier sprint est <strong> {{lastSprint}} ;-) </strong>"
+            "LAST_SPRINT_NAME": "Le dernier sprint est <strong> {{lastSprint}} ;-) </strong>"
         },
         "CREATE_EDIT_TASK": {
             "TITLE": "Nouvelle tâche",
@@ -861,13 +861,13 @@
         "TOTAL_POINTS": "total points",
         "ADD": "Ajouter un nouveau récit utilisateur",
         "ADD_BULK": "Ajouter de nouveaux récits utilisateur en lot",
-        "PROMOTED": "Ce récit utilisateur a été promue à partir d'un ticket :",
+        "PROMOTED": "Ce récit utilisateur a été promu à partir d'un ticket :",
         "TITLE_LINK_GO_TO_ISSUE": "Aller vers ce ticket",
         "EXTERNAL_REFERENCE": "Ce récit utilisateur a été créé depuis",
         "GO_TO_EXTERNAL_REFERENCE": "Allez à l'origine",
         "BLOCKED": "Ce récit utilisateur est bloqué",
-        "PREVIOUS": "user story précédente",
-        "NEXT": "récit utilisateur suivant",
+        "PREVIOUS": "User story précédente",
+        "NEXT": "Récit utilisateur suivant",
         "TITLE_DELETE_ACTION": "Supprimer ce récit utilisateur",
         "LIGHTBOX_TITLE_BLOKING_US": "US bloquante",
         "TASK_COMPLETED": "{{totalClosedTasks}}/{{totalTasks}} tâches complétées",
@@ -912,9 +912,9 @@
             "SUBJECT": "objet",
             "NAME": "nom",
             "DESCRIPTION": "description",
-            "CONTENT": "conteúdo",
+            "CONTENT": "contenu",
             "STATUS": "état",
-            "IS_CLOSED": "está fechado",
+            "IS_CLOSED": "est fermé",
             "FINISH_DATE": "date de fin",
             "TYPE": "type",
             "PRIORITY": "priorité",
@@ -945,7 +945,7 @@
         "PAGE_TITLE": "Carnet - {{projectName}}",
         "PAGE_DESCRIPTION": "Le panneau carnet avec les récits utilisateurs et sprints du projet {{projectName}} : {{projectDescription}}",
         "SECTION_NAME": "Carnet",
-        "CUSTOMIZE_GRAPH": "Customize your backlog graph",
+        "CUSTOMIZE_GRAPH": "Personnaliser votre graphe de backlog",
         "CUSTOMIZE_GRAPH_TEXT": "To have a nice graph that helps you follow the evolution of the project you have to set up the points and sprints through the",
         "CUSTOMIZE_GRAPH_ADMIN": "Admin",
         "CUSTOMIZE_GRAPH_TITLE": "Set up the points and sprints through the Admin",
